@@ -27,7 +27,7 @@ initializes plugins, validates the effective configuration, builds the VM, and
 verifies the exported disk. A failed native command stops subsequent stages.
 
 ```powershell
-git clone https://github.com/bobsira/windows-node-image-builder.git
+git clone https://github.com/bobsira/deploy.git
 Set-Location .\windows-node-image-builder
 
 $result = .\scripts\Build-WindowsImage.ps1
@@ -135,7 +135,7 @@ verified nonempty disk distinguish a completed image from an initial placeholder
 The workflow uses `actions/checkout@v7` and `actions/upload-artifact@v7`, which
 natively run on Node.js 24. Self-hosted runners require Actions Runner **2.327.1
 or newer**. The Windows/Hyper-V runner reported **2.337.0** in
-[run 34721519634](https://github.com/bobsira/windows-node-image-builder/actions/runs/34721519634),
+[run 34721519634](https://github.com/bobsira/deploy/actions/runs/34721519634),
 meeting that requirement. Checkout's separate credential storage requires
 2.329.0 or newer for authenticated Git commands inside Docker container actions;
 this workflow does not use those actions.
