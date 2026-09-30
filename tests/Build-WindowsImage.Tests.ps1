@@ -2,7 +2,7 @@
 
 Describe 'Unattended DVD boot configuration' {
     It 'disables the Packer default wait and sends ten boot-key attempts' {
-        $template = Get-Content (Join-Path $PSScriptRoot '..\windows.json.pkr.hcl') -Raw
+        $template = Get-Content (Join-Path $PSScriptRoot '..\windows-node-image\windows.json.pkr.hcl') -Raw
         $template | Should -Match '(?m)^\s*boot_wait\s*=\s*"-1s"'
         $template | Should -Match '(?m)^\s*boot_command\s*=\s*\[for attempt in range\(10\)\s*:\s*"a<wait1>"\]'
     }

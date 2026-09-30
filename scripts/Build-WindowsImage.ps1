@@ -13,6 +13,7 @@ param(
 )
 
 $repositoryRoot = Split-Path $PSScriptRoot -Parent
+$builderRoot = Join-Path $repositoryRoot 'windows-node-image'
 
 function New-ImageBuildId {
     if ($env:GITHUB_ACTIONS -eq 'true') {
@@ -122,7 +123,7 @@ function Invoke-WindowsImageBuild {
         [string]$BuildId,
         [string]$VmName = 'hybrid-minikube-windows-server',
         [string]$ArtifactRoot = (Join-Path $env:ProgramData 'WindowsNodeImageBuilder\builds'),
-        [string]$VarFile = (Join-Path $repositoryRoot 'windows.auto.pkrvars.hcl'),
+        [string]$VarFile = (Join-Path $builderRoot 'windows.auto.pkrvars.hcl'),
         [string]$WindowsVersion,
         [string]$KubernetesVersion,
         [string]$ContainerdVersion,
@@ -187,9 +188,9 @@ function Invoke-WindowsImageBuild {
                 throw "VM $($result.VmName) already exists and will not be overwritten."
             }
         }
-        Push-Location -LiteralPath $repositoryRoot
+        Push-Location -LiteralPath $builderRoot
         $locationPushed = $true
-        $template = Join-Path $repositoryRoot 'windows.json.pkr.hcl'
+        $template = Join-Path $builderRoot 'windows.json.pkr.hcl'
         $variables = @("-var-file=$VarFile", '-var', "build_id=$BuildId", '-var', "vm_name=$VmName",
             '-var', "output_directory=$outputDirectory")
         foreach ($entry in @(

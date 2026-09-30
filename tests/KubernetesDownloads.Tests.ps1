@@ -2,7 +2,7 @@
 $tokens = $null
 $parseErrors = $null
 $ast = [System.Management.Automation.Language.Parser]::ParseFile(
-    (Join-Path $PSScriptRoot '..\setup\configure-vm.ps1'), [ref]$tokens, [ref]$parseErrors)
+    (Join-Path $PSScriptRoot '..\windows-node-image\setup\configure-vm.ps1'), [ref]$tokens, [ref]$parseErrors)
 if ($parseErrors.Count) { throw ($parseErrors | Out-String) }
 foreach ($function in $ast.FindAll({
     param($node)

@@ -43,8 +43,9 @@ $result = .\scripts\Build-WindowsImage.ps1 `
     -ContainerdVersion '1.7.25'
 ```
 
-Omitted or blank version overrides use `windows.auto.pkrvars.hcl`, not the latest
-release. Use `-VarFile` for another var-file. The base VM name defaults to
+Omitted or blank version overrides use
+`windows-node-image\windows.auto.pkrvars.hcl`, not the latest release.
+Use `-VarFile` for another var-file. The base VM name defaults to
 `hybrid-minikube-windows-server`; `-VmName` overrides that base (and the var-file's
 `vm_name`), but the unique build suffix is always appended.
 
@@ -58,7 +59,7 @@ publishing:
 The template sends the DVD boot key immediately and retries it ten times, rather
 than relying on one delayed keystroke. Packer requires `boot_wait = "-1s"` to
 disable the delay; `"0s"` selects its default ten-second wait. Installation then
-uses `setup\Autounattend.xml`.
+uses `windows-node-image\setup\Autounattend.xml`.
 
 ## Build identity and isolation
 
@@ -212,7 +213,7 @@ powershell.exe -NoProfile -File .\scripts\Test-WindowsImage.ps1
 Check Packer formatting separately:
 
 ```powershell
-packer fmt -check .\windows.json.pkr.hcl
+packer fmt -check .\windows-node-image\windows.json.pkr.hcl
 ```
 
 The script tests use mocks for provisioning and Azure operations; they do not
