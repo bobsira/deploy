@@ -1,4 +1,4 @@
-# Windows Node Image Builder
+# Minikube Windows Node Image
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ verifies the exported disk. A failed native command stops subsequent stages.
 
 ```powershell
 git clone https://github.com/bobsira/deploy.git
-Set-Location .\windows-node-image-builder
+Set-Location .\deploy
 
 $result = .\scripts\Build-WindowsImage.ps1
 $result.DiskPath
